@@ -5,6 +5,14 @@ import java.util.List;
 
 public class PlanningPoker {
     public static List<String> identifyExtremes(List<Estimate> estimates) {
+        if (estimates == null) {
+            throw new IllegalArgumentException("estimates cannot be null");
+        }
+
+        if (estimates.size() <= 1) {
+            throw new IllegalArgumentException("there has to be more than 1 estimate in the list");
+        }
+
         Estimate lowestEstimate = null;
         Estimate highestEstimate = null;
 
@@ -21,8 +29,8 @@ public class PlanningPoker {
         }
 
         return Arrays.asList(
-            lowestEstimate.getDeveloperName(),
-            highestEstimate.getDeveloperName()
+                lowestEstimate.getDeveloperName(),
+                highestEstimate.getDeveloperName()
         );
     }
 }

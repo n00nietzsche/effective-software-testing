@@ -5,8 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlanningPokerTest {
@@ -48,5 +50,35 @@ class PlanningPokerTest {
         for (String extreme : extremes) {
             System.out.println("extreme = " + extreme);
         }
+    }
+
+    @Test
+    @DisplayName("identifyExtremes 메서드에 null 을 인자로 주면 IllegalArgumentException 클래스의 예외가 발생한다.")
+    void rejectNullInput() {
+        assertThatThrownBy(
+                () -> PlanningPoker.identifyExtremes(null)
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("identifyExtremes 메서드에 EmptyList 를 인자로 주면 IllegalArgumentException 클래스의 예외가 발생한다.")
+    void rejectEmptyList() {
+        assertThatThrownBy(
+                () -> {
+                    List<Estimate> emptyList = Collections.emptyList();
+                    PlanningPoker.identifyExtremes(emptyList);
+                }
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("identifyExtremes 메서드에 하나의 원소를 가진 리스트를 인자로 주면 IllegalArgumentException 클래스의 예외가 발생한다.")
+    void rejectSingleEstimate() {
+        assertThatThrownBy(
+                () -> {
+                    List<Estimate> singleElementList = Arrays.asList(new Estimate("데비", 10));
+                    PlanningPoker.identifyExtremes(singleElementList);
+                }
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }
