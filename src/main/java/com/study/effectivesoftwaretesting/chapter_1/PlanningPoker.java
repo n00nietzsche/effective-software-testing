@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PlanningPoker {
-    public List<String> identifyExtremes(List<Estimate> estimates) {
+    public static List<String> identifyExtremes(List<Estimate> estimates) {
         Estimate lowestEstimate = null;
         Estimate highestEstimate = null;
 
